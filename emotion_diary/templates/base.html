@@ -1,0 +1,53 @@
+{% load static %}
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}情绪日记分析系统{% endblock %}</title>
+  <link rel="icon" href="{% static 'images/favicon.svg' %}" type="image/svg+xml">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="{% url 'index' %}">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>
+          <div class="brand-title">情绪日记分析系统</div>
+          <div class="brand-sub">马卡龙蓝 · 马卡龙粉</div>
+        </span>
+      </a>
+
+      <nav class="nav">
+        {% if user.is_authenticated %}
+          <a class="link" href="{% url 'index' %}">首页</a>
+          <a class="link" href="{% url 'diary_list' %}">日记</a>
+          <a class="link" href="{% url 'analysis_dashboard' %}">统计</a>
+          <a class="link" href="{% url 'profile' %}">我的</a>
+          <a class="btn btn-soft" href="{% url 'logout' %}">退出</a>
+        {% else %}
+          <a class="link" href="{% url 'login' %}">登录</a>
+          <a class="btn btn-primary" href="{% url 'register' %}">注册</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      {% if messages %}
+        <div class="grid" style="margin-bottom:16px">
+          {% for message in messages %}
+            <div class="alert {% if 'error' in message.tags or 'warning' in message.tags %}alert-warn{% else %}alert-info{% endif %}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+
+      <div class="footer">© {% now "Y" %} 情绪日记分析系统</div>
+    </div>
+  </main>
+</body>
+</html>

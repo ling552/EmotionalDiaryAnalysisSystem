@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}个人信息 · 情绪日记分析系统{% endblock %}
+
+{% block content %}
+  <div class="grid grid-2">
+    <section class="card card-pad">
+      <h1 class="page-title">个人信息</h1>
+      <p class="page-sub">管理你的账号信息与安全设置。</p>
+
+      <form method="post" class="grid">
+        {% csrf_token %}
+
+        <div>
+          <label class="label">用户名</label>
+          <div class="alert">{{ user.username }}</div>
+        </div>
+
+        <div>
+          <label class="label" for="email">邮箱</label>
+          <input class="input" id="email" name="email" placeholder="example@email.com" value="{{ user.email|default:'' }}" />
+          <div class="help">用于找回账号（可选）。</div>
+        </div>
+
+        <div class="actions" style="justify-content:flex-start">
+          <button class="btn btn-primary" type="submit">保存</button>
+          <a class="btn btn-soft" href="{% url 'password_change' %}">修改密码</a>
+        </div>
+      </form>
+    </section>
+
+    <aside class="card card-pad">
+      <h2 class="page-title" style="font-size:18px">快捷入口</h2>
+      <div class="actions" style="justify-content:flex-start">
+        <a class="btn btn-soft" href="{% url 'diary_list' %}">查看日记</a>
+        <a class="btn btn-soft" href="{% url 'analysis_dashboard' %}">情绪统计</a>
+      </div>
+
+      <div style="height:12px"></div>
+      <div class="alert alert-info">提示：日记按用户隔离存储，你看到的只有自己的内容。</div>
+    </aside>
+  </div>
+{% endblock %}

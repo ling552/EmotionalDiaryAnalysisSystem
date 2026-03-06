@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}注册 · 情绪日记分析系统{% endblock %}
+
+{% block content %}
+  <div class="grid grid-2">
+    <section class="card card-pad">
+      <h1 class="page-title">创建账号</h1>
+      <p class="page-sub">只需几步，就可以开始记录你的情绪旅程。</p>
+
+      <form method="post" class="grid">
+        {% csrf_token %}
+
+        <div>
+          <label class="label" for="username">用户名</label>
+          <input class="input" id="username" name="username" autocomplete="username" placeholder="请输入用户名" />
+        </div>
+
+        <div>
+          <label class="label" for="email">邮箱（可选）</label>
+          <input class="input" id="email" name="email" autocomplete="email" placeholder="example@email.com" />
+        </div>
+
+        <div>
+          <label class="label" for="password1">密码</label>
+          <input class="input" id="password1" name="password1" type="password" autocomplete="new-password" placeholder="至少 6 位" />
+        </div>
+
+        <div>
+          <label class="label" for="password2">确认密码</label>
+          <input class="input" id="password2" name="password2" type="password" autocomplete="new-password" placeholder="再输入一次" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">注册并开始</button>
+          <a class="btn btn-soft" href="{% url 'login' %}">已有账号？去登录</a>
+        </div>
+      </form>
+    </section>
+
+    <aside class="card card-pad">
+      <h2 class="page-title" style="font-size:18px">隐私与安全</h2>
+      <div class="alert alert-info">日记内容仅对你可见（按用户关联存储）。请妥善保管账号密码。</div>
+      <div style="height:12px"></div>
+      <div class="alert alert-warn">提示：目前为本地 SQLite 开发模式，部署到生产环境时请更换 SECRET_KEY 并配置 ALLOWED_HOSTS。</div>
+    </aside>
+  </div>
+{% endblock %}

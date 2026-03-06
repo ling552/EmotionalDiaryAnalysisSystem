@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}登录 · 情绪日记分析系统{% endblock %}
+
+{% block content %}
+  <div class="grid grid-2">
+    <section class="card card-pad">
+      <h1 class="page-title">欢迎回来</h1>
+      <p class="page-sub">登录后记录日记并查看情绪趋势。</p>
+
+      <form method="post" class="grid">
+        {% csrf_token %}
+
+        <div>
+          <label class="label" for="username">用户名</label>
+          <input class="input" id="username" name="username" autocomplete="username" placeholder="请输入用户名" />
+        </div>
+
+        <div>
+          <label class="label" for="password">密码</label>
+          <input class="input" id="password" name="password" type="password" autocomplete="current-password" placeholder="请输入密码" />
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" type="submit">登录</button>
+          <a class="btn btn-soft" href="{% url 'register' %}">没有账号？去注册</a>
+        </div>
+      </form>
+    </section>
+
+    <aside class="card card-pad">
+      <h2 class="page-title" style="font-size:18px">你将获得</h2>
+      <ul class="list">
+        <li class="list-item">
+          <div>
+            <div class="list-title">情绪自动识别</div>
+            <p class="list-meta">基于词典匹配与打分的轻量分析。</p>
+          </div>
+          <span class="badge badge-blue">智能</span>
+        </li>
+        <li class="list-item">
+          <div>
+            <div class="list-title">趋势可视化</div>
+            <p class="list-meta">用图表直观看到情绪的变化。</p>
+          </div>
+          <span class="badge badge-pink">图表</span>
+        </li>
+        <li class="list-item">
+          <div>
+            <div class="list-title">心理建议</div>
+            <p class="list-meta">根据近期状态给出温柔提醒。</p>
+          </div>
+          <span class="badge badge-neutral">建议</span>
+        </li>
+      </ul>
+    </aside>
+  </div>
+{% endblock %}
